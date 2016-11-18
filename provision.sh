@@ -15,7 +15,8 @@ sudo apt-get -y --force-yes upgrade
 sudo apt-get -y install \
     terminator apt-transport-https ca-certificates docker-engine \
     docker-compose git pycharm wget gitkraken qt5-default \
-    libfftw3-dev cmake pkg-config
+    libfftw3-dev cmake pkg-config libarmadillo-dev liblog4cpp5-dev \
+    libsndfile1-dev libitpp-dev
 
 # install docker compose
 sudo curl -L https://github.com/docker/compose/releases/download/1.9.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
@@ -37,6 +38,33 @@ git clone https://github.com/miek/inspectrum
 mkdir inspectrum/build && cd build
 cmake .. && make -j && sudo make install
 
+# install gnuradio
+mkdir -p ~/build/gnuradio || cd ~/build/gnuradio
+wget http://www.sbrac.org/files/build-gnuradio
+sudo chmod +x ./build-gnuradio && ./build-gnuradio
+rm -rf ~/build/gnuradio
+
+# install gr-baz blocks for gnuradio
+cd ~/build
+git clone https://github.com/balint256/gr-baz
+mkdir ./gr-baz/build && cd gr-baz/build
+cmake .. && make -j && sudo make install
+cd .. && rm -rf ~/build/gr-baz/build
+
+# install gr-dsd
+cd ~/build
+git clone https://github.com/argilo/gr-dsd
+mkdir ./gr-dsd/build && cd gr-dsd/build
+cmake .. && make -j && sudo make install
+cd .. && rm -rf ~/build/gr-dsd/build
+
+# install gr-ais
+cd ~/build
+git clone https://github.com/bistromath/gr-ais
+mkdir ./gr-ais/build && cd gr-ais/build
+cmake .. && make -j && sudo make install
+cd .. && rm -rf ~/build/gr-ais/build
+
 # swappiness
 cat ./data/etc/sysctl-append >> /etc/sysctl.conf
 
@@ -53,6 +81,19 @@ chmod +x ~/.scripts/*
 cp -a ./data/dotfiles/* ~
 
 # folders
+mkdir ~/Desktop/gnuradio-blocks
+mv ~/build/gr-dsd ~/Desktop/gnuradio-blocks/
+mv ~/build/gr-baz ~/Desktop/gnuradio-blocks/
+mv ~/build/gr-ais ~/Desktop/gnuradio-blocks/
+
+git clone https://github.com/BrashEndeavours/dsd-samples ~/Desktop/DMR-samples
+
+mkdir ~/Desktop/grc-examples
+cd ~/Desktop/grc-examples 
+mv ~/Desktop/gnuradio-blocks/gr-baz/samples/* ./
+git clone https://github.com/argilo/sdr-examples
+
+
 rm -rf ~/Documents
 rm -rf ~/Public
 rm -rf ~/Templates
