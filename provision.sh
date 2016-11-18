@@ -52,7 +52,6 @@ chmod +x ~/.scripts/*
 # dotfiles
 cp -a ./data/dotfiles/* ~
 
-
 # folders
 rm -rf ~/Documents
 rm -rf ~/Public
