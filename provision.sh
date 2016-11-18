@@ -16,7 +16,7 @@ sudo apt-get -y install \
     terminator apt-transport-https ca-certificates docker-engine \
     docker-compose git pycharm wget gitkraken qt5-default \
     libfftw3-dev cmake pkg-config libarmadillo-dev liblog4cpp5-dev \
-    libsndfile1-dev libitpp-dev
+    libsndfile1-dev libitpp-dev vim
 
 # install docker compose
 sudo curl -L https://github.com/docker/compose/releases/download/1.9.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
@@ -32,8 +32,16 @@ cd liquid-dsp
 CFLAGS="-march=native" ./configure --enable-fftoverride
 make -j && sudo make install
 
+# install baudline
+mkdir ~/Programs || cd ~/Programs
+wget http://www.baudline.com/baudline_1.08_linux_x86_64.tar.gz
+tar xzf baudline_1.08_linux_x86_64.tar.gz
+rm baudline_1.08_linux_x86_64.tar.gz
+ln baudline_1.08_linux_x86_64/baudline ~/bin/baudline
+ln baudline_1.08_linux_x86_64/baudline_jack ~/bin/baudline_jack
+
 # install inspectrum
-mkdir ~/build || cd ~/build
+cd ~/build
 git clone https://github.com/miek/inspectrum
 mkdir inspectrum/build && cd build
 cmake .. && make -j && sudo make install
@@ -43,6 +51,13 @@ mkdir -p ~/build/gnuradio || cd ~/build/gnuradio
 wget http://www.sbrac.org/files/build-gnuradio
 sudo chmod +x ./build-gnuradio && ./build-gnuradio
 rm -rf ~/build/gnuradio
+
+# install GQRX
+cd ~/build
+git clone https://github.com/csete/gqrx
+mkdir gqrx/build && cd gqrx/build
+cmake .. && make -j && sudo make install
+rm -rf ~/build/gqrx
 
 # install gr-baz blocks for gnuradio
 cd ~/build
