@@ -5,6 +5,7 @@
 #sudo apt-key adv --keyserver pgp.mit.edu --recv-keys 5044912E
 sudo add-apt-repository -y "deb https://apt.dockerproject.org/repo ubuntu-$(lsb_release -sc) main"
 sudo add-apt-repository -y ppa:mystic-mirage/pycharm
+sudo add-apt-repository -y ppa:neovim-ppa/unstable
 sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 
 # basic update
@@ -16,7 +17,8 @@ sudo apt-get -y install \
     terminator apt-transport-https ca-certificates docker-engine \
     docker-compose git pycharm wget gitkraken qt5-default \
     libfftw3-dev cmake pkg-config libarmadillo-dev liblog4cpp5-dev \
-    libsndfile1-dev libitpp-dev vim
+    libsndfile1-dev libitpp-dev vim libcomedi-dev portaudio19-dev \
+    neovim
 
 # install docker compose
 sudo curl -L https://github.com/docker/compose/releases/download/1.9.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
@@ -49,7 +51,7 @@ cmake .. && make -j && sudo make install
 # install gnuradio
 mkdir -p ~/build/gnuradio || cd ~/build/gnuradio
 wget http://www.sbrac.org/files/build-gnuradio
-sudo chmod +x ./build-gnuradio && ./build-gnuradio
+sudo chmod +x ./build-gnuradio && ./build-gnuradio -m -ja -v
 rm -rf ~/build/gnuradio
 
 # install GQRX
