@@ -238,15 +238,15 @@ sudo ldconfig
 # Unicorn Engine
 mkdir ~/build
 cd ~/build
-git clone https://github.com/unicorn-engine/unicorn
+git clone https://github.com/unicorn-engine/unicorn.git
 cd unicorn
 ./make.sh
 sudo ./make.sh install
 cd bindings/python/
-sudo python3 setup.py install
-sudo python setup.py install
+sudo make install
 cd ~ && sudo rm -rf build
 sudo ldconfig
+
 
 # GEF
 manage-tools -s install gef
