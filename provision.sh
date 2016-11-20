@@ -105,6 +105,14 @@ echo ""
 sudo apt-get install -y libarmadillo-dev libcomedi-dev portaudio19-dev \
 libsndfile1-dev libitpp-dev libtecla-dev libqt5svg5-dev
 
+# Add RTLSDR To Blacklist
+sudo bash -c 'cat <<EOL > /etc/modprobe.d/rtlsdr.conf
+blacklist dvb_usb_rtl28xxu
+blacklist rtl2832
+blacklist rtl2830
+EOL'
+
+
 # install liquid-dsp
 mkdir ~/build
 cd ~/build
