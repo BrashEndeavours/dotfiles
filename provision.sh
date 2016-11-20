@@ -12,11 +12,12 @@ sudo apt-get -y --force-yes update
 sudo apt-get -y --force-yes upgrade
 
 # install apps
-sudo apt-get -y install 
+sudo apt-get -y install
     terminator git pycharm wget qt5-default libfftw3-dev cmake pkg-config \
     liblog4cpp5-dev vim automake build-essential chromium-browser python-pip \
     python3-pip
 
+sudo apt-get -y remove firefox
 
 echo ""
 echo "========================"
@@ -48,6 +49,10 @@ rm -rf ~/Videos
 rm -rf ~/Music
 rm ~/examples.desktop
 
+# terminator
+mkdir -p ~/.config/terminator
+cp ./data/config/terminator ~/.config/terminator/config
+
 echo ""
 echo "========================"
 echo " Done General Settings! "
@@ -76,6 +81,12 @@ sudo bash -c "curl -L https://github.com/docker/compose/releases/download/1.9.0/
 sudo chmod +x /usr/local/bin/docker-compose
 sudo groupadd docker
 sudo usermod -aG docker $USER
+
+# Install atom
+cd ~
+wget https://atom-installer.github.com/v1.12.4/atom-amd64.deb
+sudo dpkg -i atom-amd64.deb
+rm aton-amd64.deb
 
 echo ""
 echo "========================"
@@ -124,7 +135,7 @@ cd ~ && rm -rf ~/build
 mkdir -p ~/build/gnuradio
 cd ~/build/gnuradio
 wget http://www.sbrac.org/files/build-gnuradio
-sudo chmod +x build-gnuradio 
+sudo chmod +x build-gnuradio
 ./build-gnuradio -m -ja -v
 
 # install gr-baz blocks for gnuradio
@@ -159,7 +170,7 @@ git clone https://github.com/BrashEndeavours/dsd-samples ~/Desktop/DMR-samples
 
 # GNURadio Examples
 mkdir ~/Desktop/grc-examples
-cd ~/Desktop/grc-examples 
+cd ~/Desktop/grc-examples
 mv ~/Desktop/gnuradio-blocks/gr-baz/samples/* ./
 git clone https://github.com/argilo/sdr-examples
 
