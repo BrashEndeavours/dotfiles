@@ -194,7 +194,7 @@ cd ~ && rm -rf ~/build
 # install octave
 sudo apt-get -y install octave gnuplot
 # Fix the messed up permissions on octave installer....
-sudo chown $user:$user ~/.config/octave -R
+sudo chown ${USER}:${USER} ~/.config/octave -R
 
 echo ""
 echo "========================"
