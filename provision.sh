@@ -191,6 +191,11 @@ mkdir gqrx/build && cd gqrx/build
 cmake .. && make -j && sudo make install
 cd ~ && rm -rf ~/build
 
+# install octave
+sudo apt-get -y install octave gnuplot
+# Fix the messed up permissions on octave installer....
+sudo chown $user:$user ~/.config/octave -R
+
 echo ""
 echo "========================"
 echo " Done SDR Crap! "
