@@ -1,6 +1,7 @@
 #!/bin/bash
 
 PWD=$(pwd)
+
 # add repos
 sudo add-apt-repository -y "deb https://apt.dockerproject.org/repo ubuntu-xenial main"
 sudo add-apt-repository -y ppa:mystic-mirage/pycharm
@@ -41,7 +42,7 @@ cp -ar ./data/scripts/* ~/.scripts/
 chmod +x ~/.scripts/*
 
 # dotfiles
-cp -a data/dotfiles/.* ~
+cp -a data/.* ~
 rm -rf ~/Documents
 rm -rf ~/Public
 rm -rf ~/Templates
@@ -51,7 +52,7 @@ rm ~/examples.desktop
 
 # terminator
 mkdir -p ~/.config/terminator
-cp ./data/config/terminator ~/.config/terminator/config
+cp ./data/etc/terminator/config ~/.config/terminator/config
 
 echo ""
 echo "========================"

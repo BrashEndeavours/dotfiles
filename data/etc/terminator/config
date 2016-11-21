@@ -1,0 +1,51 @@
+[global_config]
+[keybindings]
+[layouts]
+  [[default]]
+    [[[child0]]]
+      fullscreen = False
+      last_active_term = 01a9d365-2aeb-4da6-94e7-a709efd8b481
+      last_active_window = True
+      maximised = False
+      order = 0
+      parent = ""
+      position = 992:24
+      size = 928, 1028
+      title = /bin/bash
+      type = Window
+    [[[child1]]]
+      order = 0
+      parent = child0
+      position = 511
+      ratio = 0.5
+      type = VPaned
+    [[[child2]]]
+      order = 0
+      parent = child1
+      position = 461
+      ratio = 0.5
+      type = HPaned
+    [[[terminal3]]]
+      order = 0
+      parent = child2
+      profile = default
+      type = Terminal
+      uuid = 01a9d365-2aeb-4da6-94e7-a709efd8b481
+    [[[terminal4]]]
+      order = 1
+      parent = child2
+      profile = default
+      type = Terminal
+      uuid = 472507b4-2590-4c53-8182-4bccad0b3a79
+    [[[terminal5]]]
+      order = 1
+      parent = child1
+      profile = default
+      type = Terminal
+      uuid = bada60a3-d0e2-4364-9abf-69af4b65224f
+[plugins]
+[profiles]
+  [[default]]
+    background_darkness = 0.9
+    background_image = None
+    background_type = transparent

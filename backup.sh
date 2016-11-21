@@ -5,11 +5,11 @@ mkdir -p ./data/scripts
 cp -ar ~/.scripts/ ./data/scripts/*
 
 # dotfiles
-mkdir -p ./data/dotfiles
-cp -a ~/.vimrc ./data/dotfiles
-cp -a ~/.bashrc ./data/dotfiles
-cp -a ~/.gitconfig ./data/dotfiles
+mkdir -p ./data/
+cp -a ~/.vimrc ./data/
+cp -a ~/.bashrc ./data/
+cp -a ~/.gitconfig ./data/
 
 # terminator config
-mkdir -p ./data/config/terminator
-cp ~/.config/terminator/config ./data/config/terminator
+mkdir -p ./data/etc/terminator
+cp ~/.config/terminator/config ./data/etc/terminator

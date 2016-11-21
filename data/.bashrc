@@ -36,3 +36,5 @@ if ! shopt -oq posix; then
   fi
 fi
 export PATH=$PATH:~/bin
+export PATH="/home/brash/ctf-tools/bin:$PATH"
+export PATH="/home/brash/ctf-tools/bin:$PATH"
