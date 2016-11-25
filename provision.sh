@@ -30,7 +30,7 @@ mkdir ~/bin
 mkdir ~/Programs
 
 # swappiness
-cat ./data/etc/sysctl-append >> /etc/sysctl.conf
+sudo cat ./data/etc/sysctl-append >> /etc/sysctl.conf
 
 # fonts
 mkdir ~/.fonts
@@ -168,6 +168,22 @@ mkdir ./gr-ais/build && cd gr-ais/build
 cmake .. && make -j && sudo make install
 cd .. && rm -rf build
 
+# install gr-op25
+sudo apt-get install libpcap-dev
+cd ~/build
+git clone https://github.com/balint256/op25.git
+mkdir -p op25/build
+cd op25/build
+cmake ..
+sed -i 's/if (isnan(symbol_error/if (std::isnan(symbol_error/' ../op25/gr-op25_repeater/lib/gardner_costas_cc_impl.cc
+make -j3 CXX_FLAGS="-Wno-narrowing -fPIC"
+sudo make install
+
+mkdir ./gr-op25/build && cd gr-ais/build
+cmake .. && make -j && sudo make install
+cd .. && rm -rf build
+https://github.com/balint256/op25.git
+
 # folders
 mkdir ~/Desktop/gnuradio-blocks
 mv ~/build/gr-dsd ~/Desktop/gnuradio-blocks/
@@ -192,7 +208,8 @@ cmake .. && make -j && sudo make install
 cd ~ && rm -rf ~/build
 
 # install octave
-sudo apt-get -y install octave gnuplot
+sudo apt-get -y install octave gnuplot octave-signal \
+                octave-communications octave-common
 # Fix the messed up permissions on octave installer....
 sudo chown ${USER}:${USER} ~/.config/octave -R
 
