@@ -104,7 +104,7 @@ echo "========================"
 echo ""
 
 sudo apt-get install -y libarmadillo-dev libcomedi-dev portaudio19-dev \
-libsndfile1-dev libitpp-dev libtecla-dev libqt5svg5-dev
+libsndfile1-dev libitpp-dev libtecla-dev libqt5svg5-dev audacity
 
 # Add RTLSDR To Blacklist
 sudo bash -c 'cat <<EOL > /etc/modprobe.d/rtlsdr.conf
