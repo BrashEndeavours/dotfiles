@@ -13,7 +13,7 @@ sudo apt-get -y --force-yes update
 sudo apt-get -y --force-yes upgrade
 
 # install apps
-sudo apt-get -y install
+sudo apt-get -y install \
     terminator git pycharm wget qt5-default libfftw3-dev cmake pkg-config \
     liblog4cpp5-dev vim automake build-essential chromium-browser python-pip \
     python3-pip codeblocks
@@ -30,7 +30,7 @@ mkdir ~/bin
 mkdir ~/Programs
 
 # swappiness
-sudo cat ./data/etc/sysctl-append >> /etc/sysctl.conf
+sudo bash -c 'cat ./data/etc/sysctl-append >> /etc/sysctl.conf'
 
 # fonts
 mkdir ~/.fonts
@@ -87,7 +87,7 @@ sudo usermod -aG docker $USER
 cd ~
 wget https://atom-installer.github.com/v1.12.4/atom-amd64.deb
 sudo dpkg -i atom-amd64.deb
-rm aton-amd64.deb
+rm atom-amd64.deb
 
 echo ""
 echo "========================"
