@@ -119,8 +119,8 @@ mkdir ~/build
 cd ~/build
 git clone git://github.com/jgaeddert/liquid-dsp.git
 cd liquid-dsp
-./bootstrap.sh
-CFLAGS="-march=native" ./configure --enable-fftoverride
+./bootstrap.sh  
+./configure --enable-fftoverride CFLAGS="-march=native"
 make -j && sudo make install
 cd ~ && rm -rf ~/build
 
