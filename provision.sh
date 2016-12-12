@@ -77,7 +77,8 @@ rm gitkraken-amd64.deb
 cd ~ && rm -rf ~/build
 
 # install docker
-sudo apt-get install docker-engine apt-transport-https ca-certificates
+sudo apt-get -y install \
+  docker-engine apt-transport-https ca-certificates
 sudo bash -c "curl -L https://github.com/docker/compose/releases/download/1.9.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose"
 sudo chmod +x /usr/local/bin/docker-compose
 sudo groupadd docker
@@ -103,8 +104,9 @@ echo " Installing SDR Crap! "
 echo "========================"
 echo ""
 
-sudo apt-get install -y libarmadillo-dev libcomedi-dev portaudio19-dev \
-libsndfile1-dev libitpp-dev libtecla-dev libqt5svg5-dev audacity
+sudo apt-get -y install \
+  libarmadillo-dev libcomedi-dev portaudio19-dev libsndfile1-dev libitpp-dev \
+  libtecla-dev libqt5svg5-dev audacity
 
 # Add RTLSDR To Blacklist
 sudo bash -c 'cat <<EOL > /etc/modprobe.d/rtlsdr.conf
@@ -169,7 +171,8 @@ cmake .. && make -j && sudo make install
 cd .. && rm -rf build
 
 # install gr-op25
-sudo apt-get install libpcap-dev
+sudo apt-get -y install \
+  libpcap-dev
 cd ~/build
 git clone https://github.com/balint256/op25.git
 mkdir -p op25/build
@@ -178,17 +181,15 @@ cmake ..
 sed -i 's/if (isnan(symbol_error/if (std::isnan(symbol_error/' ../op25/gr-op25_repeater/lib/gardner_costas_cc_impl.cc
 make -j3 CXX_FLAGS="-Wno-narrowing -fPIC"
 sudo make install
-
-mkdir ./gr-op25/build && cd gr-ais/build
-cmake .. && make -j && sudo make install
 cd .. && rm -rf build
-https://github.com/balint256/op25.git
 
 # folders
+cd ~
 mkdir ~/Desktop/gnuradio-blocks
 mv ~/build/gr-dsd ~/Desktop/gnuradio-blocks/
 mv ~/build/gr-baz ~/Desktop/gnuradio-blocks/
 mv ~/build/gr-ais ~/Desktop/gnuradio-blocks/
+mv ~/build/op25 ~/Desktop/gnuradio-blocks/
 
 # DMR Samples
 git clone https://github.com/BrashEndeavours/dsd-samples ~/Desktop/DMR-samples
@@ -208,8 +209,8 @@ cmake .. && make -j && sudo make install
 cd ~ && rm -rf ~/build
 
 # install octave
-sudo apt-get -y install octave gnuplot octave-signal \
-                octave-communications octave-common
+sudo apt-get -y install \
+  octave gnuplot octave-signal octave-communications octave-common
 # Fix the messed up permissions on octave installer....
 sudo chown ${USER}:${USER} ~/.config/octave -R
 
@@ -229,9 +230,9 @@ echo ""
 
 # CTF Tools
 cd ~
-sudo apt-get install -y build-essential libtool g++ gcc texinfo curl wget  \
-    automake autoconf python python-dev git subversion unzip virtualenvwrapper \
-    libtool-bin bison
+sudo apt-get -y install \
+  build-essential libtool g++ gcc texinfo curl wget automake autoconf python \
+  python-dev git subversion unzip virtualenvwrapper libtool-bin bison
 git clone https://github.com/zardus/ctf-tools
 ~/ctf-tools/bin/manage-tools setup
 source ~/.bashrc
@@ -280,8 +281,9 @@ sudo ldconfig
 
 
 # GEF
-manage-tools -s install gef
-
+manage-tools -s install gef ropper
+pip3 install retdec-python ropgadget
+pip install ropgadget
 
 echo ""
 echo "========================"
