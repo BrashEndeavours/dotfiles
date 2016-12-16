@@ -16,7 +16,7 @@ sudo apt-get -y --force-yes upgrade
 sudo apt-get -y install \
     terminator git pycharm wget qt5-default libfftw3-dev cmake pkg-config \
     liblog4cpp5-dev vim automake build-essential chromium-browser python-pip \
-    python3-pip codeblocks
+    python3-pip codeblocks qtcreator
 
 sudo apt-get -y remove firefox
 
