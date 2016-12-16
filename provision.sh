@@ -183,6 +183,27 @@ make -j3 CXX_FLAGS="-Wno-narrowing -fPIC"
 sudo make install
 cd .. && rm -rf build
 
+# install rtl-sdr
+cd ~/build
+git clone git clone https://github.com/osmocom/rtl-sdr
+mkdir ./rtl-sdr/build && cd rtl-sdr/build
+cmake .. && make -j && sudo make install
+cd .. && rm -rf build
+
+# install gqrx
+cd ~/build
+git clone https://github.com/csete/gqrx
+mkdir ./gqrx/build && cd gqrx/build
+cmake .. && make -j && sudo make install
+cd .. && rm -rf build
+
+# install r820tweak
+cd ~/build
+git clone https://github.com/gat3way/r820tweak
+cd r820tweak
+make -j && sudo make install
+
+
 # folders
 cd ~
 mkdir ~/Desktop/gnuradio-blocks
