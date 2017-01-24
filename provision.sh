@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -x
 PWD=$(pwd)
 
 # add repos
