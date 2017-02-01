@@ -42,7 +42,7 @@ cp -ar ./data/scripts/* ~/.scripts/
 chmod +x ~/.scripts/*
 
 # dotfiles
-cp -a data/.* ~
+cp -a ./data/.* ~
 rm -rf ~/Documents
 rm -rf ~/Public
 rm -rf ~/Templates
@@ -312,6 +312,19 @@ echo " Done RE Crap! "
 echo "========================"
 echo ""
 
+echo ""
+echo "========================"
+echo " Installing LATEX Crap! "
+echo "========================"
+echo ""
+
+sudo apt-get install -y texstudio
+
+echo ""
+echo "========================"
+echo " Done LATEX Crap! "
+echo "========================"
+echo ""
 # update system settings
 #gsettings set com.canonical.indicator.power show-percentage true
 
