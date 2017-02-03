@@ -325,6 +325,21 @@ echo "========================"
 echo " Done LATEX Crap! "
 echo "========================"
 echo ""
+
+echo ""
+echo "==================================="
+echo " Installing Machine Learning Crap! "
+echo "==================================="
+echo ""
+
+pip install tensorflow
+
+echo ""
+echo "============================="
+echo " Done Machine Learning Crap! "
+echo "============================="
+echo ""
+
 # update system settings
 #gsettings set com.canonical.indicator.power show-percentage true
 
