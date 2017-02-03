@@ -318,7 +318,7 @@ echo " Installing LATEX Crap! "
 echo "========================"
 echo ""
 
-sudo apt-get install -y texstudio
+sudo apt-get install -y texstudio texlive-math-extra
 
 echo ""
 echo "========================"
