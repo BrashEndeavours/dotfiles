@@ -333,6 +333,12 @@ echo "==================================="
 echo ""
 
 pip install tensorflow
+pip install numpy
+pip install scipy
+pip install pyyaml
+pip install h5py
+pip install keras
+sudo apt-get install libhdf5-dev
 
 echo ""
 echo "============================="
