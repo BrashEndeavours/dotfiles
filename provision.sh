@@ -139,7 +139,7 @@ mkdir ~/build
 cd ~/build
 git clone https://github.com/miek/inspectrum
 mkdir inspectrum/build && cd inspectrum/build
-cmake .. && make -j && sudo make install
+cmake .. && make -j4 && sudo make install
 cd ~ && rm -rf ~/build
 
 # install gnuradio
@@ -153,21 +153,21 @@ sudo chmod +x build-gnuradio
 cd ~/build
 git clone https://github.com/balint256/gr-baz
 mkdir ./gr-baz/build && cd gr-baz/build
-cmake .. && make -j && sudo make install
+cmake .. && make -j4 && sudo make install
 cd .. && rm -rf build
 
 # install gr-dsd
 cd ~/build
 git clone https://github.com/argilo/gr-dsd
 mkdir ./gr-dsd/build && cd gr-dsd/build
-cmake .. && make -j && sudo make install
+cmake .. && make -j4 && sudo make install
 cd .. && rm -rf build
 
 # install gr-ais
 cd ~/build
 git clone https://github.com/bistromath/gr-ais
 mkdir ./gr-ais/build && cd gr-ais/build
-cmake .. && make -j && sudo make install
+cmake .. && make -j4 && sudo make install
 cd .. && rm -rf build
 
 # install gr-op25
@@ -179,7 +179,7 @@ mkdir -p op25/build
 cd op25/build
 cmake ..
 sed -i 's/if (isnan(symbol_error/if (std::isnan(symbol_error/' ../op25/gr-op25_repeater/lib/gardner_costas_cc_impl.cc
-make -j3 CXX_FLAGS="-Wno-narrowing -fPIC"
+make -j4 CXX_FLAGS="-Wno-narrowing -fPIC"
 sudo make install
 cd .. && rm -rf build
 
@@ -187,14 +187,7 @@ cd .. && rm -rf build
 cd ~/build
 git clone git clone https://github.com/osmocom/rtl-sdr
 mkdir ./rtl-sdr/build && cd rtl-sdr/build
-cmake .. && make -j && sudo make install
-cd .. && rm -rf build
-
-# install gqrx
-cd ~/build
-git clone https://github.com/csete/gqrx
-mkdir ./gqrx/build && cd gqrx/build
-cmake .. && make -j && sudo make install
+cmake .. && make -j4 && sudo make install
 cd .. && rm -rf build
 
 # install r820tweak
@@ -227,7 +220,7 @@ cd ~/build
 git clone https://github.com/csete/gqrx
 mkdir gqrx/build && cd gqrx/build
 cmake .. && make -j && sudo make install
-cd ~ && rm -rf ~/build
+cd .. && rm -rf build
 
 # install octave
 sudo apt-get -y install \
@@ -272,7 +265,6 @@ sudo make install
 cd ../bindings/python/
 sudo python3 setup.py install
 sudo python setup.py install
-cd ~ && sudo rm -rf build
 sudo ldconfig
 
 # Capstone Engine
@@ -285,7 +277,6 @@ sudo ./make.sh install
 cd bindings/python/
 sudo python3 setup.py install
 sudo python setup.py install
-cd ~ && sudo rm -rf build
 sudo ldconfig
 
 # Unicorn Engine
@@ -297,7 +288,6 @@ cd unicorn
 sudo ./make.sh install
 cd bindings/python/
 sudo make install
-cd ~ && sudo rm -rf build
 sudo ldconfig
 
 
