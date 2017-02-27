@@ -142,53 +142,25 @@ mkdir inspectrum/build && cd inspectrum/build
 cmake .. && make -j4 && sudo make install
 cd ~ && rm -rf ~/build
 
-# install gnuradio
-mkdir -p ~/build/gnuradio
-cd ~/build/gnuradio
-wget http://www.sbrac.org/files/build-gnuradio
-sudo chmod +x build-gnuradio
-./build-gnuradio -m -ja -v
+# install GNURADIO/BLOCKS
+cd ~
+sudo pip install pybombs
+pybombs recipes add gr-recipes git+https://github.com/gnuradio/gr-recipes.git
+pybombs recipes add gr-etcetera git+https://github.com/gnuradio/gr-etcetera.git
+mkdir gnuradio/
+pybombs prefix init -a default gnuradio/default
 
-# install gr-baz blocks for gnuradio
-cd ~/build
-git clone https://github.com/balint256/gr-baz
-mkdir ./gr-baz/build && cd gr-baz/build
-cmake .. && make -j4 && sudo make install
-cd .. && rm -rf build
+cd gnuradio/default
+source ./setup_env.sh
+pybombs install apache thrift
+pybombs install gnuradio
+pybombs install gr-baz
+pybombs install gr-dsd
+pybombs install gr-ais
+pybombs install gr-op25
+pybombs install rtl-sdr
+pybombs install gqrx
 
-# install gr-dsd
-cd ~/build
-git clone https://github.com/argilo/gr-dsd
-mkdir ./gr-dsd/build && cd gr-dsd/build
-cmake .. && make -j4 && sudo make install
-cd .. && rm -rf build
-
-# install gr-ais
-cd ~/build
-git clone https://github.com/bistromath/gr-ais
-mkdir ./gr-ais/build && cd gr-ais/build
-cmake .. && make -j4 && sudo make install
-cd .. && rm -rf build
-
-# install gr-op25
-sudo apt-get -y install \
-  libpcap-dev
-cd ~/build
-git clone https://github.com/balint256/op25.git
-mkdir -p op25/build
-cd op25/build
-cmake ..
-sed -i 's/if (isnan(symbol_error/if (std::isnan(symbol_error/' ../op25/gr-op25_repeater/lib/gardner_costas_cc_impl.cc
-make -j4 CXX_FLAGS="-Wno-narrowing -fPIC"
-sudo make install
-cd .. && rm -rf build
-
-# install rtl-sdr
-cd ~/build
-git clone git clone https://github.com/osmocom/rtl-sdr
-mkdir ./rtl-sdr/build && cd rtl-sdr/build
-cmake .. && make -j4 && sudo make install
-cd .. && rm -rf build
 
 # install r820tweak
 cd ~/build
@@ -196,31 +168,16 @@ git clone https://github.com/gat3way/r820tweak
 cd r820tweak
 make -j && sudo make install
 
-
 # folders
 cd ~
 mkdir ~/Desktop/gnuradio-blocks
-mv ~/build/gr-dsd ~/Desktop/gnuradio-blocks/
-mv ~/build/gr-baz ~/Desktop/gnuradio-blocks/
-mv ~/build/gr-ais ~/Desktop/gnuradio-blocks/
-mv ~/build/op25 ~/Desktop/gnuradio-blocks/
+#mv ~/build/gr-dsd ~/Desktop/gnuradio-blocks/
+#mv ~/build/gr-baz ~/Desktop/gnuradio-blocks/
+#mv ~/build/gr-ais ~/Desktop/gnuradio-blocks/
+#mv ~/build/op25 ~/Desktop/gnuradio-blocks/
 
 # DMR Samples
 git clone https://github.com/BrashEndeavours/dsd-samples ~/Desktop/DMR-samples
-
-# GNURadio Examples
-mkdir ~/Desktop/grc-examples
-cd ~/Desktop/grc-examples
-mv ~/Desktop/gnuradio-blocks/gr-baz/samples/* ./
-git clone https://github.com/argilo/sdr-examples
-
-# install GQRX
-mkdir ~/build
-cd ~/build
-git clone https://github.com/csete/gqrx
-mkdir gqrx/build && cd gqrx/build
-cmake .. && make -j && sudo make install
-cd .. && rm -rf build
 
 # install octave
 sudo apt-get -y install \
