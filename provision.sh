@@ -151,6 +151,7 @@ pybombs prefix init -a default gnuradio/default
 cd gnuradio/default
 source ./setup_env.sh
 pybombs install apache thrift
+pybombs install pygraphviz
 pybombs install gnuradio
 pybombs install gr-baz
 pybombs install gr-dsd
