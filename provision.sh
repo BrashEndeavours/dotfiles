@@ -4,7 +4,7 @@ PWD=$(pwd)
 
 # add repos
 sudo add-apt-repository -y "deb https://apt.dockerproject.org/repo ubuntu-xenial main"
-sudo add-apt-repository -y ppa:mystic-mirage/pycharm
+#sudo add-apt-repository -y ppa:mystic-mirage/pycharm
 sudo add-apt-repository -y ppa:neovim-ppa/unstable
 sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 
@@ -14,7 +14,7 @@ sudo apt-get -y --force-yes upgrade
 
 # install apps
 sudo apt-get -y install \
-    terminator git pycharm wget qt5-default libfftw3-dev cmake pkg-config \
+    terminator git wget qt5-default libfftw3-dev cmake pkg-config \
     liblog4cpp5-dev vim automake build-essential chromium-browser python-pip \
     python3-pip codeblocks qtcreator
 
@@ -106,7 +106,7 @@ echo ""
 
 sudo apt-get -y install \
   libarmadillo-dev libcomedi-dev portaudio19-dev libsndfile1-dev libitpp-dev \
-  libtecla-dev libqt5svg5-dev audacity
+  libtecla-dev libqt5svg5-dev audacity libusb-dev
 
 # Add RTLSDR To Blacklist
 sudo bash -c 'cat <<EOL > /etc/modprobe.d/rtlsdr.conf
@@ -124,7 +124,6 @@ cd liquid-dsp
 ./bootstrap.sh  
 ./configure --enable-fftoverride CFLAGS="-march=native"
 make -j && sudo make install
-cd ~ && rm -rf ~/build
 
 # install baudline
 cd ~/Programs
@@ -140,7 +139,6 @@ cd ~/build
 git clone https://github.com/miek/inspectrum
 mkdir inspectrum/build && cd inspectrum/build
 cmake .. && make -j4 && sudo make install
-cd ~ && rm -rf ~/build
 
 # install GNURADIO/BLOCKS
 cd ~
@@ -160,7 +158,6 @@ pybombs install gr-ais
 pybombs install gr-op25
 pybombs install rtl-sdr
 pybombs install gqrx
-
 
 # install r820tweak
 cd ~/build
@@ -190,8 +187,6 @@ echo "========================"
 echo " Done SDR Crap! "
 echo "========================"
 echo ""
-
-
 
 echo ""
 echo "========================"
