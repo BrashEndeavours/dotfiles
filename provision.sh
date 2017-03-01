@@ -156,7 +156,7 @@ pybombs install gnuradio
 pybombs install gr-baz
 pybombs install gr-dsd
 pybombs install gr-ais
-pybombs install gr-op25
+#pybombs install gr-op25
 pybombs install rtl-sdr
 pybombs install gqrx
 
