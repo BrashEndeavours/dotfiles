@@ -68,6 +68,9 @@ echo " General Programs! "
 echo "========================"
 echo ""
 
+# Upgrade pip
+pip install --upgrade pip
+
 # install gitkraken
 mkdir ~/build
 cd ~/build
@@ -89,6 +92,10 @@ cd ~
 wget https://atom-installer.github.com/v1.12.4/atom-amd64.deb
 sudo dpkg -i atom-amd64.deb
 rm atom-amd64.deb
+
+# Install Jupyter
+cd ~
+pip install jupyter
 
 echo ""
 echo "========================"
@@ -121,7 +128,7 @@ mkdir ~/build
 cd ~/build
 git clone git://github.com/jgaeddert/liquid-dsp.git
 cd liquid-dsp
-./bootstrap.sh  
+./bootstrap.sh
 ./configure --enable-fftoverride CFLAGS="-march=native"
 make -j && sudo make install
 
