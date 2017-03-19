@@ -42,7 +42,7 @@ cp -ar ./data/scripts/* ~/.scripts/
 chmod +x ~/.scripts/*
 
 # dotfiles
-cp -a ./data/.* ~
+cp -R ./data ~
 rm -rf ~/Documents
 rm -rf ~/Public
 rm -rf ~/Templates
@@ -52,7 +52,7 @@ rm ~/examples.desktop
 
 # terminator
 mkdir -p ~/.config/terminator
-cp ./data/etc/terminator/config ~/.config/terminator/config
+cp ~/data/etc/terminator/config ~/.config/terminator/config
 
 echo ""
 echo "========================"
