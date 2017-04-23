@@ -309,12 +309,12 @@ echo " Installing Machine Learning Crap! "
 echo "==================================="
 echo ""
 
-pip install tensorflow
-pip install numpy
-pip install scipy
-pip install pyyaml
-pip install h5py
-pip install keras
+sudo pip install tensorflow
+sudo pip install numpy
+sudo pip install scipy
+sudo pip install pyyaml
+sudo pip install h5py
+sudo pip install keras
 sudo apt-get install libhdf5-dev
 
 echo ""
