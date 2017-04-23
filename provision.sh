@@ -192,7 +192,7 @@ wget http://www.etsi.org/deliver/etsi_ts/102300_102399/10236104/01.08.01_60/ts_1
 
 cd ~/build
 wget https://github.com/egoist/devdocs-app/releases/download/v0.2.2/DevDocs_0.2.2_amd64.deb
-dpkg -i DevDocs_0.2.2_amd64.deb
+sudo dpkg -i DevDocs_0.2.2_amd64.deb
 
 # install r820tweak
 cd ~/build
