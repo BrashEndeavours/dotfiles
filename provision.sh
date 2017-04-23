@@ -95,7 +95,7 @@ rm atom-amd64.deb
 
 # Install Jupyter
 cd ~
-pip install jupyter
+sudo pip install jupyter
 
 echo ""
 echo "========================"
