@@ -130,7 +130,7 @@ git clone git://github.com/jgaeddert/liquid-dsp.git
 cd liquid-dsp
 ./bootstrap.sh
 ./configure --enable-fftoverride CFLAGS="-march=native"
-make -j && sudo make install
+make -j4 && sudo make install
 
 # install baudline
 cd ~/Programs
