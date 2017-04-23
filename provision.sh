@@ -167,6 +167,33 @@ pybombs install gr-ais
 pybombs install rtl-sdr
 pybombs install gqrx
 
+# install thesis
+cd ~/Desktop
+mkdir work
+cd work
+git clone http://github.com/brashendeavours/gr-thesis
+
+# install extras
+cd ~/Desktop
+mkdir extras
+cd extras
+git clone https://github.com/f4exb/dsdcc
+
+# install references
+cd ~/Desktop
+mkdir references
+cd references
+mkdir standards
+cd standards
+wget http://www.etsi.org/deliver/etsi_ts/102300_102399/10236101/02.04.01_60/ts_10236101v020401p.pdf
+wget http://www.etsi.org/deliver/etsi_ts/102300_102399/10236102/02.03.01_60/ts_10236102v020301p.pdf
+wget http://www.etsi.org/deliver/etsi_ts/102300_102399/10236103/01.02.01_60/ts_10236103v010201p.pdf
+wget http://www.etsi.org/deliver/etsi_ts/102300_102399/10236104/01.08.01_60/ts_10236104v010801p.pdf
+
+cd ~/build
+wget https://github.com/egoist/devdocs-app/releases/download/v0.2.2/DevDocs_0.2.2_amd64.deb
+dpkg -i DevDocs_0.2.2_amd64.deb
+
 # install r820tweak
 cd ~/build
 git clone https://github.com/gat3way/r820tweak
