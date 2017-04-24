@@ -183,6 +183,25 @@ git clone https://github.com/f4exb/dsdcc
 cd ~/Desktop
 mkdir references
 cd references
+wget https://github.com/egoist/devdocs-app/releases/download/v0.2.2/DevDocs_0.2.2_amd64.deb
+sudo dpkg -i DevDocs_0.2.2_amd64.deb
+rm DevDocs_0.2.2_amd64.deb
+
+wget http://upload.cppreference.com/mwiki/images/3/37/html_book_20170409.tar.gz
+tar -xzf html_book_20170409.tar.gz && rm html_book_20170409.tar.gz
+rm *.xml
+mv reference c++
+
+wget https://docs.python.org/2/archives/python-2.7.13-docs-html.tar.bz2
+tar -xjf python-2.7.13-docs-html.tar.bz2 && rm python-2.7.13-docs-html.tar.bz2
+mv python-2.7.13-docs-html python-2.7
+
+wget https://keras.io/ -D keras.io -rkp -l6
+find ./keras.io -name "*.html" -exec sed -i 's_/">_/index.html">_' {} \;
+
+#wget http://www.tensorflow.com -D www.tensorflow.com -rkp -l6
+
+
 mkdir standards
 cd standards
 wget http://www.etsi.org/deliver/etsi_ts/102300_102399/10236101/02.04.01_60/ts_10236101v020401p.pdf
@@ -190,9 +209,6 @@ wget http://www.etsi.org/deliver/etsi_ts/102300_102399/10236102/02.03.01_60/ts_1
 wget http://www.etsi.org/deliver/etsi_ts/102300_102399/10236103/01.02.01_60/ts_10236103v010201p.pdf
 wget http://www.etsi.org/deliver/etsi_ts/102300_102399/10236104/01.08.01_60/ts_10236104v010801p.pdf
 
-cd ~/build
-wget https://github.com/egoist/devdocs-app/releases/download/v0.2.2/DevDocs_0.2.2_amd64.deb
-sudo dpkg -i DevDocs_0.2.2_amd64.deb
 
 # install r820tweak
 cd ~/build
