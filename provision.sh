@@ -326,7 +326,33 @@ echo " Installing Machine Learning Crap! "
 echo "==================================="
 echo ""
 
-sudo pip install tensorflow
+# Development headers
+sudo apt-get install linux-headers-$(uname -r)
+
+# CUDA® Toolkit 8.0
+wget https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64-deb
+sudo dpkg -i cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64.deb
+sudo apt-get update
+sudo apt-get install cuda
+bash -c 'cat <<EOL > ~/.bashrc
+export PATH="/usr/local/cuda/bin:${PATH}"                                   
+export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
+EOL' 
+sudo rm cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64.deb
+ 
+# cuDNN v5.1
+https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v5.1/prod_20161129/8.0/cudnn-8.0-linux-x64-v5.1-tgz
+tar -xzf cudnn-8.0-linux-x64-v5.1-tgz 
+rm cudnn-8.0-linux-x64-v5.1-tgz
+sudo mv cuda /usr/local/cuDNN
+sudo rm libcudnn5-dev_5.1.10-1+cuda8.0_amd64-deb
+bash -c 'cat <<EOL > ~/.bashrc
+export LD_LIBRARY_PATH="/usr/local/cuDNN/lib64:$LD_LIBRARY_PATH"
+EOL' 
+
+sudo apt-get install libcupti-dev
+sudo pip install tensorflow-gpu
+
 sudo pip install numpy
 sudo pip install scipy
 sudo pip install pyyaml
