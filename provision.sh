@@ -89,10 +89,10 @@ sudo usermod -aG docker $USER
 
 # Install atom
 cd ~
-wget https://az764295.vo.msecnd.net/stable/376c52b955428d205459bea6619fc161fc8faacf/code_1.13.0-1496940180_amd64.deb
+https://go.microsoft.com/fwlink/?LinkID=760868
 #wget https://atom-installer.github.com/v1.12.4/atom-amd64.deb
-sudo dpkg -i code_1.13.0-1496940180_amd64.deb
-rm code_1.13.0-1496940180_amd64.deb
+sudo dpkg -i *_amd64.deb
+rm *_amd64.deb
 
 # Install Jupyter
 cd ~
