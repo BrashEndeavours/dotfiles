@@ -35,6 +35,5 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-export PATH=$PATH:~/bin
-export PATH="/home/brash/ctf-tools/bin:$PATH"
-export PATH="/home/brash/ctf-tools/bin:$PATH"
+export PATH="/usr/local/cuda-8.0/bin:~/ctf-tools/bin:~/bin:${PATH}"
+export LD_LIBRARY_PATH="/usr/local/cuda-8.0/lib64:${LD_LIBRARY_PATH}"
