@@ -114,7 +114,7 @@ echo ""
 
 sudo apt-get -y install \
   libarmadillo-dev libcomedi-dev portaudio19-dev libsndfile1-dev libitpp-dev \
-  libtecla-dev libqt5svg5-dev audacity libusb-dev
+  libtecla-dev libqt5svg5-dev audacity libusb-dev libcgraph6 graphviz-dev graphviz
 
 # Add RTLSDR To Blacklist
 sudo bash -c 'cat <<EOL > /etc/modprobe.d/rtlsdr.conf
@@ -151,6 +151,9 @@ cmake .. && make -j4 && sudo make install
 # install GNURADIO/BLOCKS
 cd ~
 sudo pip install pybombs
+sudo pip install networkx
+sudo pip install matplotlib
+sudo pip install pygraphviz
 pybombs recipes add gr-recipes git+https://github.com/gnuradio/gr-recipes.git
 pybombs recipes add gr-etcetera git+https://github.com/gnuradio/gr-etcetera.git
 mkdir gnuradio/
@@ -353,12 +356,8 @@ sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
 sudo apt-get install libcupti-dev
 sudo pip install tensorflow-gpu
 
-sudo pip install numpy
-sudo pip install scipy
-sudo pip install pyyaml
-sudo pip install h5py
-sudo pip install keras
 sudo apt-get install libhdf5-dev
+sudo pip install --no-binary :all: --upgrade numpy scipy pyyaml h5py keras
 
 echo ""
 echo "============================="
