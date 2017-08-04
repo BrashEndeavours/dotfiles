@@ -3,9 +3,6 @@ set -x
 PWD=$(pwd)
 
 # add repos
-sudo add-apt-repository -y "deb https://apt.dockerproject.org/repo ubuntu-xenial main"
-#sudo add-apt-repository -y ppa:mystic-mirage/pycharm
-sudo add-apt-repository -y ppa:neovim-ppa/unstable
 sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 
 # basic update
@@ -79,15 +76,7 @@ sudo dpkg -i gitkraken-amd64.deb
 rm gitkraken-amd64.deb
 cd ~ && rm -rf ~/build
 
-# install docker
-sudo apt-get -y install \
-  docker-engine apt-transport-https ca-certificates
-sudo bash -c "curl -L https://github.com/docker/compose/releases/download/1.9.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose"
-sudo chmod +x /usr/local/bin/docker-compose
-sudo groupadd docker
-sudo usermod -aG docker $USER
-
-# Install atom
+# Install VS Code
 cd ~
 https://go.microsoft.com/fwlink/?LinkID=760868
 #wget https://atom-installer.github.com/v1.12.4/atom-amd64.deb
@@ -243,71 +232,6 @@ echo " Done SDR Crap! "
 echo "========================"
 echo ""
 
-echo ""
-echo "========================"
-echo " Installing RE Crap! "
-echo "========================"
-echo ""
-
-# CTF Tools
-cd ~
-sudo apt-get -y install \
-  build-essential libtool g++ gcc texinfo curl wget automake autoconf python \
-  python-dev git subversion unzip virtualenvwrapper libtool-bin bison
-git clone https://github.com/zardus/ctf-tools
-~/ctf-tools/bin/manage-tools setup
-source ~/.bashrc
-
-# American Fuzzy Lop
-manage-tools -s install afl
-
-# Keystone Engine
-mkdir ~/build
-cd ~/build
-git clone https://github.com/keystone-engine/keystone
-mkdir keystone/build
-cd keystone/build
-../make-share.sh
-sudo make install
-cd ../bindings/python/
-sudo python3 setup.py install
-sudo python setup.py install
-sudo ldconfig
-
-# Capstone Engine
-mkdir ~/build
-cd ~/build
-git clone https://github.com/aquynh/capstone
-cd capstone
-./make.sh
-sudo ./make.sh install
-cd bindings/python/
-sudo python3 setup.py install
-sudo python setup.py install
-sudo ldconfig
-
-# Unicorn Engine
-mkdir ~/build
-cd ~/build
-git clone https://github.com/unicorn-engine/unicorn.git
-cd unicorn
-./make.sh
-sudo ./make.sh install
-cd bindings/python/
-sudo make install
-sudo ldconfig
-
-
-# GEF
-manage-tools -s install gef ropper
-pip3 install retdec-python ropgadget
-pip install ropgadget
-
-echo ""
-echo "========================"
-echo " Done RE Crap! "
-echo "========================"
-echo ""
 
 echo ""
 echo "========================"
@@ -335,15 +259,14 @@ sudo apt-get install linux-headers-$(uname -r)
 # CUDA® Toolkit 8.0
 mkdir ~/build
 cd ~/build
-
-wget https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64-deb
-sudo dpkg -i cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64-deb
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
+sudo dpkg -i cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
 sudo apt-get update
-sudo apt-get install cuda
+sudo apt-get install -y cuda libcupti-dev libhdf5-dev
 
-rm cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64-deb
+rm cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
  
-# cuDNN v5.1
+# cuDNN v6.0
 mkdir ~/build
 cd ~/build
 wget https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v5.1/prod_20161129/8.0/cudnn-8.0-linux-x64-v6.0-tgz
@@ -352,8 +275,9 @@ sudo cp cuda/include/cudnn.h /usr/local/cuda/include
 sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
 sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
 
-sudo apt-get install libcupti-dev libhdf5-dev
-sudo pip install --install-option="--jobs=6" --no-binary :all: --upgrade numpy scipy pyyaml h5py keras tensorflow-gpu
+sudo pip install --install-option="--jobs=6" --no-binary :all: --upgrade numpy scipy pyyaml h5py keras
+sudo pip  install --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.3.0rc1-cp27-none-linux_x86_64.whl
+
 
 echo ""
 echo "============================="
@@ -361,17 +285,7 @@ echo " Done Machine Learning Crap! "
 echo "============================="
 echo ""
 
-# update system settings
-#gsettings set com.canonical.indicator.power show-percentage true
-
-# update some more system settings
-#dconf write /org/compiz/profiles/unity/plugins/unityshell/icon-size 32
-
-# requires clicks
-#sudo apt-get install -y ubuntu-restricted-extras
-
-# prompt for a reboot
-clear
+sudo ldconfig
 echo ""
 echo "========================"
 echo " TIME FOR A REBOOT! "
