@@ -13,7 +13,9 @@ sudo apt-get -y --force-yes upgrade
 sudo apt-get -y install \
     terminator git wget qt5-default libfftw3-dev cmake pkg-config \
     liblog4cpp5-dev vim automake build-essential chromium-browser python-pip \
-    python3-pip codeblocks qtcreator
+    python3-pip codeblocks qtcreator libboost-all-dev libarmadillo-dev \
+    libcomedi-dev portaudio19-dev libsndfile1-dev libitpp-dev libtecla-dev \
+    libqt5svg5-dev audacity libusb-dev libcgraph6 graphviz-dev graphviz
 
 sudo apt-get -y remove firefox
 
@@ -78,10 +80,9 @@ cd ~ && rm -rf ~/build
 
 # Install VS Code
 cd ~
-https://go.microsoft.com/fwlink/?LinkID=760868
-#wget https://atom-installer.github.com/v1.12.4/atom-amd64.deb
-sudo dpkg -i *_amd64.deb
-rm *_amd64.deb
+wget https://go.microsoft.com/fwlink/?LinkID=760868
+sudo dpkg -i code*.deb
+rm code*.deb
 
 # Install Jupyter
 cd ~
@@ -100,10 +101,6 @@ echo "========================"
 echo " Installing SDR Crap! "
 echo "========================"
 echo ""
-
-sudo apt-get -y install \
-  libarmadillo-dev libcomedi-dev portaudio19-dev libsndfile1-dev libitpp-dev \
-  libtecla-dev libqt5svg5-dev audacity libusb-dev libcgraph6 graphviz-dev graphviz
 
 # Add RTLSDR To Blacklist
 sudo bash -c 'cat <<EOL > /etc/modprobe.d/rtlsdr.conf
@@ -143,22 +140,22 @@ sudo pip install pybombs
 sudo pip install networkx
 sudo pip install matplotlib
 sudo pip install pygraphviz
-pybombs recipes add gr-recipes git+https://github.com/gnuradio/gr-recipes.git
-pybombs recipes add gr-etcetera git+https://github.com/gnuradio/gr-etcetera.git
+yes | pybombs recipes add gr-recipes git+https://github.com/gnuradio/gr-recipes.git
+yes | pybombs recipes add gr-etcetera git+https://github.com/gnuradio/gr-etcetera.git
 mkdir gnuradio/
 pybombs prefix init -a default gnuradio/default
 
 cd gnuradio/default
 source ./setup_env.sh
-pybombs install apache-thrift
-pybombs install pygraphviz
-pybombs install gnuradio
-pybombs install gr-baz
-pybombs install gr-dsd
-pybombs install gr-ais
-#pybombs install gr-op25
-pybombs install rtl-sdr
-pybombs install gqrx
+yes | pybombs install apache-thrift
+yes | pybombs install pygraphviz
+yes | pybombs install gnuradio
+yes | pybombs install gr-baz
+yes | pybombs install gr-dsd
+yes | pybombs install gr-ais
+yes | pybombs install gr-op25
+yes | pybombs install rtl-sdr
+yes | pybombs install gqrx
 
 # install thesis
 cd ~/Desktop
@@ -265,11 +262,14 @@ sudo apt-get update
 sudo apt-get install -y cuda libcupti-dev libhdf5-dev
 
 rm cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
- 
+
 # cuDNN v6.0
 mkdir ~/build
 cd ~/build
+
+### FETCH THE FILE BELOW MANUALLY
 wget https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v5.1/prod_20161129/8.0/cudnn-8.0-linux-x64-v6.0-tgz
+
 tar -xzvf cudnn-8.0-linux-x64-v6.0.tgz
 sudo cp cuda/include/cudnn.h /usr/local/cuda/include
 sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
@@ -278,6 +278,9 @@ sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
 sudo pip install --install-option="--jobs=6" --no-binary :all: --upgrade numpy scipy pyyaml h5py keras
 sudo pip  install --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.3.0rc1-cp27-none-linux_x86_64.whl
 
+sudo touch /usr/local/lib/python2.7/dist-packages/google/__init__.py
+sudo touch /usr/local/lib/python2.7/dist-packages/mpl_toolkits/__init__.py
+sudo touch /usr/local/lib/python2.7/dist-packages/ruamel/__init__.py
 
 echo ""
 echo "============================="
