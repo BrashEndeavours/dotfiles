@@ -87,6 +87,7 @@ rm code*.deb
 # Install Jupyter
 cd ~
 sudo pip install jupyter
+sudo pip install --no-binary :all: numpy h5py scipy keras
 
 echo ""
 echo "========================"
