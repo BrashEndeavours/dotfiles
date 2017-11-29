@@ -87,7 +87,6 @@ rm code*.deb
 # Install Jupyter
 cd ~
 sudo pip install jupyter tqdm
-sudo pip install --no-binary :all: numpy h5py scipy keras
 
 echo ""
 echo "========================"
@@ -188,19 +187,6 @@ wget https://github.com/egoist/devdocs-app/releases/download/v0.2.2/DevDocs_0.2.
 sudo dpkg -i DevDocs_0.2.2_amd64.deb
 rm DevDocs_0.2.2_amd64.deb
 
-wget http://upload.cppreference.com/mwiki/images/3/37/html_book_20170409.tar.gz
-tar -xzf html_book_20170409.tar.gz && rm html_book_20170409.tar.gz
-rm *.xml
-mv reference c++
-
-wget https://docs.python.org/2/archives/python-2.7.13-docs-html.tar.bz2
-tar -xjf python-2.7.13-docs-html.tar.bz2 && rm python-2.7.13-docs-html.tar.bz2
-mv python-2.7.13-docs-html python-2.7
-
-wget https://keras.io/ -D keras.io -rkp -l6
-find ./keras.io -name "*.html" -exec sed -i 's_/">_/index.html">_' {} \;
-
-#wget http://www.tensorflow.com -D www.tensorflow.com -rkp -l6
 
 mkdir standards
 cd standards
@@ -267,29 +253,32 @@ sudo cp InstallUtils.pm /usr/lib/x86_64-linux-gnu/perl-base
 sudo apt-get install linux-headers-$(uname -r)
 
 # CUDA® Toolkit 8.0
-mkdir ~/build
-cd ~/build
-wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
-sudo dpkg -i cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
-sudo apt-get update
-sudo apt-get install -y cuda libcupti-dev libhdf5-dev
+mkdir ~/build/cuda
+cd ~/build/cuda
+wget https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda_8.0.61_375.26_linux-run
+wget https://developer.nvidia.com/compute/cuda/8.0/Prod2/patches/2/cuda_8.0.61.2_linux-run
+sudo chmod +x cuda*
+./cuda_8.0.61_375.26_linux-run --tar mxvf
+sudo cp InstallUtils.pm /usr/lib/x86_64-linux-gnu/perl-base
+sudo ./cuda_8.0.61_375.26_linux-run-override
+sudo cuda_8.0.61.2_linux-run
 
-rm cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
+sudo apt-get update
+sudo apt-get install -y libcupti-dev libhdf5-dev
 
 # cuDNN v6.0
 mkdir ~/build
 cd ~/build
 
 ### FETCH THE FILE BELOW MANUALLY
-wget https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v5.1/prod_20161129/8.0/cudnn-8.0-linux-x64-v6.0-tgz
+wget https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v5.1/prod_20161129/8.0/cudnn-8.0-linux-x64-v7.tgz
 
-tar -xzvf cudnn-8.0-linux-x64-v6.0.tgz
-sudo cp cuda/include/cudnn.h /usr/local/cuda/include
-sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
-sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
+tar -xzvf cudnn-8.0-linux-x64-v7.tgz 
+sudo cp cuda/include/* /usr/local/cuda-8.0/include/
+sudo cp cuda/lib64/* /usr/local/cuda-8.0/lib64/
 
-sudo pip install --install-option="--jobs=6" --no-binary :all: --upgrade numpy scipy pyyaml h5py keras
-sudo pip  install --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.3.0rc1-cp27-none-linux_x86_64.whl
+sudo pip install --no-binary :all: --upgrade numpy scipy pyyaml h5py keras
+sudo pip install --upgrade tensorflow-gpu
 
 sudo touch /usr/local/lib/python2.7/dist-packages/google/__init__.py
 sudo touch /usr/local/lib/python2.7/dist-packages/mpl_toolkits/__init__.py
