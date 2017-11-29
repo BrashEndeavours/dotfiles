@@ -135,7 +135,17 @@ git clone https://github.com/miek/inspectrum
 mkdir inspectrum/build && cd inspectrum/build
 cmake .. && make -j4 && sudo make install
 
-# install GNURADIO/BLOCKS
+# Ensure kernel.shmmax=32147483647 is set in kernel, for gnuradio
+sudo -s -- <<EOF
+grep -q '^kernel.shmmax' /etc/sysctl.conf && sed -i 's/^kernel.shmmax.*/kernel.shmmax = 32147483647/' /etc/sysctl.conf || echo 'kernel.shmmax = 32147483648' >> /etc/sysctl.conf
+EOF
+
+# Ensure kernel.shmmni = 64000 is set in kernel, for gnuradio
+sudo -s -- <<EOF
+grep -q '^kernel.shmmni' /etc/sysctl.conf && sed -i 's/^kernel.shmmni.*/kernel.shmmni = 64000/' /etc/sysctl.conf || echo 'kernel.shmmni = 64000' >> /etc/sysctl.conf
+EOF
+
+# Install GNURADIO/BLOCKS
 cd ~
 sudo pip install pybombs
 sudo pip install networkx
@@ -191,7 +201,6 @@ wget https://keras.io/ -D keras.io -rkp -l6
 find ./keras.io -name "*.html" -exec sed -i 's_/">_/index.html">_' {} \;
 
 #wget http://www.tensorflow.com -D www.tensorflow.com -rkp -l6
-
 
 mkdir standards
 cd standards
@@ -250,6 +259,9 @@ echo "==================================="
 echo " Installing Machine Learning Crap! "
 echo "==================================="
 echo ""
+
+./cuda*.run --tar mxvf
+sudo cp InstallUtils.pm /usr/lib/x86_64-linux-gnu/perl-base
 
 # Development headers
 sudo apt-get install linux-headers-$(uname -r)
