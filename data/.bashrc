@@ -35,6 +35,8 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-export PATH="/usr/local/cuda-8.0/bin:~/ctf-tools/bin:~/bin:${PATH}"
-export LD_LIBRARY_PATH="/usr/local/cuda-8.0/lib64:${LD_LIBRARY_PATH}"
+export PATH="/usr/local/cuda-8.0/bin:${PATH}"                                   
+export LD_LIBRARY_PATH="/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH"             
+export TF_CPP_MIN_LOG_LEVEL=2         
 export PERL5LIB=.
+source ~/gnuradio/default/setup_env.sh
