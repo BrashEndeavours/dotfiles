@@ -15,7 +15,7 @@ sudo apt-get -y install \
     liblog4cpp5-dev vim automake build-essential chromium-browser python-pip \
     python3-pip codeblocks qtcreator libboost-all-dev libarmadillo-dev \
     libcomedi-dev portaudio19-dev libsndfile1-dev libitpp-dev libtecla-dev \
-    libqt5svg5-dev audacity libusb-dev libcgraph6 graphviz-dev graphviz
+    libqt5svg5-dev audacity libusb-dev libcgraph6 graphviz-dev graphviz libgconf-2-4
 
 sudo apt-get -y remove firefox
 
