@@ -257,8 +257,10 @@ wget https://developer.nvidia.com/compute/cuda/8.0/Prod2/patches/2/cuda_8.0.61.2
 sudo chmod +x cuda*
 ./cuda_8.0.61_375.26_linux-run --tar mxvf
 sudo cp InstallUtils.pm /usr/lib/x86_64-linux-gnu/perl-base
-sudo ./cuda_8.0.61_375.26_linux-run-override
-sudo cuda_8.0.61.2_linux-run
+sudo ./cuda_8.0.61_375.26_linux-run --override
+sudo ldconfig
+sudo ./cuda_8.0.61.2_linux-run
+sudo ldconfig
 
 sudo apt-get update
 sudo apt-get install -y libcupti-dev libhdf5-dev
