@@ -41,7 +41,9 @@ cp -ar ./data/scripts/* ~/.scripts/
 chmod +x ~/.scripts/*
 
 # dotfiles
-cp -R ./data ~
+cd ~/dotfiles
+cp -R ./data/.* ~/
+chown $(whoami).$(whoami) ~/*
 rm -rf ~/Documents
 rm -rf ~/Public
 rm -rf ~/Templates
@@ -81,8 +83,9 @@ cd ~ && rm -rf ~/build
 # Install VS Code
 cd ~
 wget https://go.microsoft.com/fwlink/?LinkID=760868
-sudo dpkg -i code*.deb
-rm code*.deb
+sudo chmod +x index.html?LinkID=760868
+sudo dpkg -i index.html?LinkID=760868
+rm index.html?LinkID=760868
 
 # Install Jupyter
 cd ~
@@ -146,14 +149,11 @@ EOF
 
 # Install GNURADIO/BLOCKS
 cd ~
-sudo pip install pybombs
-sudo pip install networkx
-sudo pip install matplotlib
-sudo pip install pygraphviz
+sudo pip install --upgrade pybombs networkx matplotlib pygraphviz
 yes | pybombs recipes add gr-recipes git+https://github.com/gnuradio/gr-recipes.git
 yes | pybombs recipes add gr-etcetera git+https://github.com/gnuradio/gr-etcetera.git
 mkdir gnuradio/
-pybombs prefix init -a default gnuradio/default
+yes | pybombs prefix init -a default gnuradio/default
 
 cd gnuradio/default
 source ./setup_env.sh
@@ -246,9 +246,6 @@ echo " Installing Machine Learning Crap! "
 echo "==================================="
 echo ""
 
-./cuda*.run --tar mxvf
-sudo cp InstallUtils.pm /usr/lib/x86_64-linux-gnu/perl-base
-
 # Development headers
 sudo apt-get install linux-headers-$(uname -r)
 
@@ -266,16 +263,14 @@ sudo cuda_8.0.61.2_linux-run
 sudo apt-get update
 sudo apt-get install -y libcupti-dev libhdf5-dev
 
-# cuDNN v6.0
+# cuDNN v7.0
 mkdir ~/build
 cd ~/build
-
-### FETCH THE FILE BELOW MANUALLY
-wget https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v5.1/prod_20161129/8.0/cudnn-8.0-linux-x64-v7.tgz
-
-tar -xzvf cudnn-8.0-linux-x64-v7.tgz 
-sudo cp cuda/include/* /usr/local/cuda-8.0/include/
-sudo cp cuda/lib64/* /usr/local/cuda-8.0/lib64/
+read -p "Download the cuDNN for Cuda 8, place it in ~/build/ and press enter to continue"
+tar xzf cudnn*
+cd cudnn
+sudo cp include/* /usr/local/cuda-8.0/include/
+sudo cp lib64/* /usr/local/cuda-8.0/lib64/
 
 sudo pip install --no-binary :all: --upgrade numpy scipy pyyaml h5py keras
 sudo pip install --upgrade tensorflow-gpu
