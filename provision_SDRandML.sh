@@ -15,7 +15,8 @@ sudo apt-get -y install \
     liblog4cpp5-dev vim automake build-essential chromium-browser python-pip \
     python3-pip codeblocks qtcreator libboost-all-dev libarmadillo-dev \
     libcomedi-dev portaudio19-dev libsndfile1-dev libitpp-dev libtecla-dev \
-    libqt5svg5-dev audacity libusb-dev libcgraph6 graphviz-dev graphviz libgconf-2-4
+    libqt5svg5-dev audacity libusb-dev libcgraph6 graphviz-dev graphviz libgconf-2-4 \
+    mongodb-server
 
 sudo apt-get -y remove firefox
 
@@ -89,7 +90,7 @@ rm index.html?LinkID=760868
 
 # Install Jupyter
 cd ~
-sudo pip install jupyter tqdm
+sudo pip install jupyter tqdm sacred pymongo
 
 echo ""
 echo "========================"
