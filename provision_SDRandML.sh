@@ -90,7 +90,7 @@ rm index.html?LinkID=760868
 
 # Install Jupyter
 cd ~
-sudo pip install jupyter tqdm sacred pymongo
+sudo pip install jupyter tqdm sacred pymongo sacredboard
 
 echo ""
 echo "========================"
